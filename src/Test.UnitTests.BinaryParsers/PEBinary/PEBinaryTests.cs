@@ -27,31 +27,40 @@ namespace Microsoft.CodeAnalysis.BinaryParsers
         [Fact]
         public void PdbAvailable()
         {
-            string fileName = Path.Combine(BaselineTestsDataDirectory, "Native_x64_VS2013_Default.pdb");
-            PEBinary peBinary = new PEBinary(new Uri(fileName));
-            peBinary.Pdb.Should().NotBeNull();
-            peBinary.StrippedPdb.Should().BeNull();
-            peBinary.PdbParseException.Should().BeNull();
+            if (PlatformSpecificHelpers.RunningOnWindows())
+            {
+                string fileName = Path.Combine(BaselineTestsDataDirectory, "Native_x64_VS2013_Default.pdb");
+                PEBinary peBinary = new PEBinary(new Uri(fileName));
+                peBinary.Pdb.Should().NotBeNull();
+                peBinary.StrippedPdb.Should().BeNull();
+                peBinary.PdbParseException.Should().BeNull();
+            }
         }
 
         [Fact]
         public void NoPdbAvailable()
         {
-            string fileName = Path.Combine(BaselineTestsDataDirectory, "Native_x86_VS2013_PdbMissing.exe");
-            PEBinary peBinary = new PEBinary(new Uri(fileName));
-            peBinary.Pdb.Should().BeNull();
-            peBinary.StrippedPdb.Should().BeNull();
-            peBinary.PdbParseException.Should().NotBeNull();
+            if (PlatformSpecificHelpers.RunningOnWindows())
+            {
+                string fileName = Path.Combine(BaselineTestsDataDirectory, "Native_x86_VS2013_PdbMissing.exe");
+                PEBinary peBinary = new PEBinary(new Uri(fileName));
+                peBinary.Pdb.Should().BeNull();
+                peBinary.StrippedPdb.Should().BeNull();
+                peBinary.PdbParseException.Should().NotBeNull();
+            }
         }
 
         [Fact]
         public void PdbIsStripped()
         {
-            string fileName = Path.Combine(BaselineTestsDataDirectory, "Native_x86_VS2017_15.5.4_PdbStripped.dll");
-            PEBinary peBinary = new PEBinary(new Uri(fileName));
-            peBinary.Pdb.Should().BeNull();
-            peBinary.StrippedPdb.Should().NotBeNull();
-            peBinary.PdbParseException.Should().NotBeNull();
+            if (PlatformSpecificHelpers.RunningOnWindows())
+            {
+                string fileName = Path.Combine(BaselineTestsDataDirectory, "Native_x86_VS2017_15.5.4_PdbStripped.dll");
+                PEBinary peBinary = new PEBinary(new Uri(fileName));
+                peBinary.Pdb.Should().BeNull();
+                peBinary.StrippedPdb.Should().NotBeNull();
+                peBinary.PdbParseException.Should().NotBeNull();
+            }
         }
     }
 }

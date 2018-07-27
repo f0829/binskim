@@ -54,8 +54,6 @@ call :RunTestProject BinSkim.Rules Functional  || goto :ExitFailed
 echo Creating Platform Specific BinSkim 'Publish' Packages
 call :CreatePublishPackage net461 win-x86 || goto :ExitFailed
 call :CreatePublishPackage net461 win-x64 || goto :ExitFailed
-call :CreatePublishPackage netcoreapp2.0 win-x86 || goto :ExitFailed
-call :CreatePublishPackage netcoreapp2.0 win-x64 || goto :ExitFailed
 call :CreatePublishPackage netcoreapp2.0 linux-x64 || goto :ExitFailed
 
 ::Build NuGet package
