@@ -16,7 +16,7 @@ call %NUGET% SetApiKey %API_KEY% -Source %SOURCE%
 if "%ERRORLEVEL%" NEQ "0" (echo set api key of %API_KEY% to %SOURCE% FAILED && goto Exit)
 
 @REM Publish BinSkim
-set ID=Microsoft.CodeAnalysis.BinSkim
+set ID=Microsoft.SecurityTools.BinSkim
 set PACKAGE_ROOT=bld\bin\nuget\%ID%.%VERSION%
 
 call %NUGET% push %PACKAGE_ROOT%.nupkg -Source %SOURCE%
